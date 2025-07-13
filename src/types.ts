@@ -98,7 +98,7 @@ export interface TokenResponse {
  * Error structure for SmartClient operations.
  */
 export class SmartClientError extends Error {
-  public readonly cause?: Error;
+  public override readonly cause?: Error;
   public readonly details?: any;
 
   constructor(message: string, options?: { cause?: Error, details?: any }) {

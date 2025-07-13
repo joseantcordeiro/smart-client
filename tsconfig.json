@@ -8,6 +8,7 @@
 		"inlineSources": false,
 		"isolatedModules": true,
 		"module": "es2022",
+		"target": "es2022",
 		"moduleResolution": "bundler",
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
