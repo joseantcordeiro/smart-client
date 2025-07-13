@@ -1,8 +1,9 @@
 {
 	"name": "@joseantcordeiro/smart-client",
 	"version": "0.1.0",
-	"private": true,
-	"description": "A reusable TypeScript package for client authorization within a backend application.",
+	"author": "José Cordeiro <joseantcordeiro@gmail.com> (https://github.com/joseantcordeiro)",
+	"private": false,
+	"description": "A reusable TypeScript package for fhir client authorization within a backend application.",
 	"license": "MIT",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -22,7 +23,6 @@
 		"uuid": "^10.0.0"
 	},
 	"devDependencies": {
-		"@repo/eslint-config": "workspace:*",
 		"@types/fhir": "^0.0.41",
 		"@types/uuid": "^10.0.0",
 		"eslint": "9.27.0",
