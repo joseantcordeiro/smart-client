@@ -53,12 +53,6 @@ export class SmartClient {
 				'Invalid SmartClientConfig: clientId, iss, scope, and privateKey are required.'
 			)
 		}
-		// Validate that iss and clientId are the same, as per the spec for client credentials
-		/**if (config.iss !== config.clientId) {
-			throw new SmartClientInitializationError(
-				'Invalid SmartClientConfig: iss and clientId must be identical for this authentication flow.'
-			)
-		}*/
 
 		this.config = {
 			...config,
@@ -102,20 +96,11 @@ export class SmartClient {
 		if (issUrl) {
 			// Ensure issUrl ends with a slash for proper URL joining
 			const baseIss = issUrl.endsWith('/') ? issUrl : `${issUrl}/`
-			//wellKnownUrl = new URL('.well-known/smart-configuration', baseIss).toString()
 			wellKnownUrl = `${baseIss}.well-known/smart-configuration`
 		} else if (this.config.iss) {
-			// The .well-known/smart-configuration path should be relative to the authority's root,
-			// not necessarily the FHIR base URL's path (e.g. /r4).
-			// We construct it from the origin of fhirBaseUrl.
 			try {
+				// Ensure this.config.iss ends with a slash for proper URL joining
 				const baseIss = this.config.iss.endsWith('/') ? this.config.iss : `${this.config.iss}/`
-				/**const fhirBaseUrlObj = new URL(this.config.fhirBaseUrl)
-				// Ensure the base for .well-known is the origin, without any sub-paths like /r4
-				const authorityRoot = fhirBaseUrlObj.endsWith('/')
-					? fhirBaseUrlObj.origin
-					: `${fhirBaseUrlObj.origin}/` 
-				wellKnownUrl = new URL('.well-known/smart-configuration', baseIss).toString()*/
 				wellKnownUrl = `${baseIss}.well-known/smart-configuration`
 			} catch (e: any) {
 				throw new SmartClientInitializationError(
@@ -360,7 +345,7 @@ export class SmartClient {
 			return response.data
 		} catch (error: any) {
 			let errorMessage = `FHIR API request to '${resourcePath}' failed: ${error.message}`
-			let errorDetails: any = { requestPath: resourcePath, requestMethod: method }
+			const errorDetails: any = { requestPath: resourcePath, requestMethod: method }
 
 			if (axios.isAxiosError(error)) {
 				const axiosError = error as AxiosError<any>
@@ -402,7 +387,7 @@ export class SmartClient {
 							return retryResponse.data
 						} catch (retryError: any) {
 							let finalErrorMessage = `FHIR API request to '${resourcePath}' failed after retry: ${retryError.message}`
-							let finalErrorCause = retryError
+							const finalErrorCause = retryError
 							let finalErrorDetails = (retryError as SmartClientError).details || errorDetails
 
 							if (retryError instanceof SmartClientAuthenticationError) {

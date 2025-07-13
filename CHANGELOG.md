@@ -2,6 +2,13 @@
 
 All notable changes to `@joseantcordeiro/smart-client` will be documented in this file.
 
+## [0.1.1] - 2025-07-13
+
+### Small Changes
+
+- Eslint fixes
+- Minor documentation updates
+
 ## [0.1.0] - 2025-07-13
 
 ### Initial Release

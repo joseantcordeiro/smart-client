@@ -65,7 +65,7 @@ export interface SmartClientConfig {
 The client must be initialized before use. The static `init()` method fetches the FHIR server's SMART configuration.
 
 ```typescript
-import { SmartClient, SmartClientConfig } from '@repo/smart-client';
+import { SmartClient, SmartClientConfig } from '@joseantcordeiro/smart-client';
 
 async function initializeSmartClient() {
   const config: SmartClientConfig = {
