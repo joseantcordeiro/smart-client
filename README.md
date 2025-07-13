@@ -1,7 +1,5 @@
 # @joseantcordeiro/smart-client
 
-## Package Title and Description
-
 **SMART FHIR Backend Services Client**
 
 This package provides a TypeScript client for backend applications to securely authenticate and interact with SMART on FHIR servers. It implements the [SMART App Launch IG: Backend Services](https://hl7.org/fhir/smart-app-launch/backend-services.html) profile, specifically focusing on asymmetric (public key) client authentication (`private_key_jwt`) using the OAuth 2.0 client credentials grant flow.
@@ -27,8 +25,8 @@ The client handles fetching the server's SMART configuration, generating JWT ass
 
 ### Prerequisites
 
-*   Node.js (version recommended by the monorepo, e.g., >=18.x)
-*   pnpm (version recommended by the monorepo)
+*   Node.js (>=18.x)
+*   npm, pnpm, or Yarn
 *   A provisioned client ID and registered public key(s) with the target FHIR authorization server.
 
 ### Steps
@@ -36,10 +34,9 @@ The client handles fetching the server's SMART configuration, generating JWT ass
 1.  **Add the package as a dependency** to your application:
 
     ```bash
-    # If your package is in the same monorepo
     pnpm add @joseantcordeiro/smart-client
+    pnpm add -D @types/fhir
     ```
-    This will also install its direct dependencies: `axios`, `jose`, and `uuid`.
 
 ## Usage
 
@@ -51,7 +48,7 @@ The `SmartClient` requires a configuration object of type `SmartClientConfig`. T
 // src/types.ts (example of what SmartClientConfig looks like)
 export interface SmartClientConfig {
   clientId: string; // Your client_id
-  iss: string; // Issuer URL, must be identical to clientId for this flow
+  iss: string; // Issuer URL
   scope: string; // e.g., "system/Patient.read system/Observation.write"
   privateKey: string; // Your private key in PEM (PKCS8) or JWK (JSON string) format
   fhirBaseUrl?: string; // Base URL of the FHIR server (e.g., "https://fhir.your-server.com/r4")
@@ -168,10 +165,13 @@ smart-client/
 │   ├── types.ts              # TypeScript interfaces and error classes
 │   ├── index.ts              # Main entry point, exports public API
 │   └── client.test.ts        # Unit tests for the client
-├── .eslintrc.cjs             # ESLint configuration
+├── .gitignore                # Git ignore file
+├── eslint-config.js          # ESLint configuration
+├── LICENSE                   # License file
 ├── package.json              # Package manifest, dependencies, and scripts
 ├── README.md                 # This file
 └── tsconfig.json             # TypeScript compiler options
+└── vitest.config.ts          # Vitest configuration
 ```
 
 ## Dependencies
@@ -195,7 +195,7 @@ Contributions are welcome! Please follow these guidelines:
     *   Fork the repository and create a new branch for your feature or bug fix.
     *   Ensure your code follows the existing coding style and conventions (ESLint should pass).
     *   Write unit tests for any new functionality or bug fixes.
-    *   Make sure all tests pass (`pnpm test` within the package or relevant turbo command).
+    *   Make sure all tests pass (`pnpm test` within the package).
     *   Update documentation (README, code comments) as necessary.
     *   Open a pull request with a clear description of your changes.
 
