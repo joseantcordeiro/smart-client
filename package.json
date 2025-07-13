@@ -1,6 +1,6 @@
 {
 	"name": "@joseantcordeiro/smart-client",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "José Cordeiro <joseantcordeiro@gmail.com> (https://github.com/joseantcordeiro)",
 	"private": false,
 	"description": "A reusable TypeScript package for fhir client authorization within a backend application.",
@@ -16,6 +16,7 @@
 		"check:lint": "eslint . --ext .ts",
 		"check:types": "tsc --noEmit",
 		"release": "semantic-release",
+		"publish": "npm publish --access public",
 		"test": "vitest --testTimeout=15000 -c ./vitest.config.ts"
 	},
 	"dependencies": {
@@ -53,7 +54,7 @@
 	"homepage": "https://github.com/joseantcordeiro/smart-client#readme",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/joseantcordeiro/smart-client.git"
+		"url": "git+https://github.com/joseantcordeiro/smart-client.git"
 	},
 	"bugs": {
 		"url": "https://github.com/joseantcordeiro/smart-client/issues",
@@ -80,5 +81,6 @@
 			],
 			"@semantic-release/github"
 		]
-	}
+	},
+	"keywords": ["fhir", "smart", "oauth", "jwt", "jose", "client", "authorization"]
 }
